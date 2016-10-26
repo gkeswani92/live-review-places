@@ -1,16 +1,15 @@
 from models.database_setup import SQLAlchemyService
+from flask import Flask
 from api_cmds.routes import about_page
 from api_cmds.routes import index_page
 from api_cmds.routes import sign_up_page
-from flask import Flask
-
 
 app = Flask(__name__)
 
 # Setup database connectivity
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/location_based_service'
-db = SQLAlchemyService().instantiate_sql_alchemy()
-db.init_app(app)
+SQLAlchemyService().instantiate_sql_alchemy()
+SQLAlchemyService().initialize_db(app)
 
 # Register blueprint for index and about pages
 app.register_blueprint(index_page)

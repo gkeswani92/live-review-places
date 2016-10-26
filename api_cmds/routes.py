@@ -1,7 +1,8 @@
 from flask import render_template
 from flask import Blueprint
 from flask import request
-from forms. sign_up import SignUpForm
+from forms.sign_up import SignUpForm
+from logic.sign_up import register_user
 
 
 index_page = Blueprint('index', __name__, template_folder='templates')
@@ -21,11 +22,21 @@ def about():
 
 @sign_up_page.route('/signup', methods=['GET', 'POST'])
 def sign_up():
+    form = SignUpForm()
 
     # If the request method is POST, it means that the request has come from the clicking of the submit button
     if request.method == 'POST':
-        return "Successfully submitted form"
+
+        # If the form data was invalid, render the form again with error messages
+        if form.validate() is False:
+            return render_template('sign_up.html', form=form)
+
+        else:
+            first_name = form.first_name.data
+            last_name = form.last_name.data
+            email = form.email.data
+            password = form.password.data
+            return register_user(first_name, last_name, email, password)
 
     # Get request means this is a fresh request and is not coming from clicking the submit button
-    form = SignUpForm()
     return render_template('sign_up.html', form=form)

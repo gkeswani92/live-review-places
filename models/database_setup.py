@@ -13,18 +13,18 @@ class SQLAlchemyService(object):
             self.db = SQLAlchemy()
         return self.db
 
-    def initialize_sql_alchemy(self):
-        """
-            Initializes the SQL Alchemy connection to the database
-        """
-        if not self.db:
-            self.instantiate_sql_alchemy()
-        self.db.init_app()
-
     def get_instance(self):
         """
             Getter method for the db instance
         """
+        if self.db is None:
+            self.instantiate_sql_alchemy()
         return self.db
+
+    def initialize_db(self, app):
+        if self.db is None:
+            self.instantiate_sql_alchemy()
+        self.db.init_app(app)
+
 
 
