@@ -1,6 +1,7 @@
 from models.database_setup import SQLAlchemyService
 from api_cmds.routes import about_page
 from api_cmds.routes import index_page
+from api_cmds.routes import sign_up_page
 from flask import Flask
 
 
@@ -14,6 +15,9 @@ db.init_app(app)
 # Register blueprint for index and about pages
 app.register_blueprint(index_page)
 app.register_blueprint(about_page)
+app.register_blueprint(sign_up_page)
+
+app.secret_key = 'development-key'
 
 if __name__ == "__main__":
     # Run flask app in debug bug on localhost
