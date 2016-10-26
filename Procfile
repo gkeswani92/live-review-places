@@ -1,1 +1,1 @@
-web: gunicorn api_cmds/routes:app
+web: gunicorn setup:app
