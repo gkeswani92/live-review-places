@@ -26,6 +26,11 @@ def about():
 
 @sign_up_page.route('/signup', methods=['GET', 'POST'])
 def sign_up():
+
+    # Authorization to make sure logged in user cannot see sign up page
+    if 'email' in session:
+        return redirect(url_for('home.home'))
+
     form = SignUpForm()
 
     # If the request method is POST, it means that the request has come from the clicking of the submit button
@@ -51,6 +56,10 @@ def sign_up():
 
 @home_page.route('/home')
 def home():
+    
+    # Authorization to make sure only logged in users can see the home page
+    if 'email' not in session:
+        return redirect(url_for('login.login'))
     return render_template('home.html')
 
 
@@ -62,6 +71,11 @@ def sign_out():
 
 @login_page.route('/login', methods=['GET', 'POST'])
 def login():
+
+    # Authorization to make sure logged in user cannot see sign up page
+    if 'email' in session:
+        return redirect(url_for('home.home'))
+
     form = LoginForm()
 
     if request.method == 'POST':
@@ -74,7 +88,7 @@ def login():
 
             if login_successful:
                 session['email'] = email
-                return redirect('home')
+                return redirect(url_for('home.home'))
             else:
                 return render_template('login.html', form=form, error=message)
 
