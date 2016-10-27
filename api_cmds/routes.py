@@ -11,6 +11,7 @@ about_page = Blueprint('about', __name__, template_folder='templates')
 sign_up_page = Blueprint('sign_up', __name__, template_folder='templates')
 home_page = Blueprint('home', __name__, template_folder='templates')
 login_page = Blueprint('login', __name__, template_folder='templates')
+sign_out_page = Blueprint('sign_out', __name__, template_folder='templates')
 
 
 @index_page.route('/')
@@ -53,8 +54,14 @@ def home():
     return render_template('home.html')
 
 
+@sign_out_page.route('/sign_out')
+def sign_out():
+    session.pop('email', None)
+    return redirect('/')
+
+
 @login_page.route('/login', methods=['GET', 'POST'])
-def home():
+def login():
     form = LoginForm()
 
     if request.method == 'POST':
@@ -63,8 +70,13 @@ def home():
         else:
             email = form.email.data
             password = form.password.data
-            login, message = is_valid_user(email, password)
-            return message
+            login_successful, message = is_valid_user(email, password)
+
+            if login_successful:
+                session['email'] = email
+                return redirect('home')
+            else:
+                return render_template('login.html', form=form, error=message)
 
     else:
         return render_template('login.html', form=form)

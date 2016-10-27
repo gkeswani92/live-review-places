@@ -3,6 +3,7 @@ from flask import Flask
 from api_cmds.routes import about_page
 from api_cmds.routes import index_page
 from api_cmds.routes import sign_up_page
+from api_cmds.routes import sign_out_page
 from api_cmds.routes import home_page
 from api_cmds.routes import login_page
 
@@ -17,6 +18,7 @@ SQLAlchemyService().initialize_db(app)
 app.register_blueprint(index_page)
 app.register_blueprint(about_page)
 app.register_blueprint(sign_up_page)
+app.register_blueprint(sign_out_page)
 app.register_blueprint(home_page)
 app.register_blueprint(login_page)
 
