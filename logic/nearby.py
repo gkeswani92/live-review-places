@@ -1,4 +1,6 @@
 import json
+from unittest import TestCase
+
 import geocoder
 import urllib2
 
@@ -12,7 +14,9 @@ def meters_to_walking_time(meters):
     Finds the walking time for the given distance
     """
     # 80 meters is one minute walking time
-    return int(meters / 80)
+    if meters:
+        return int(meters / 80)
+    return -1
 
 
 def wiki_path(place):
@@ -68,4 +72,6 @@ def find_nearby_places(address):
         places.append(place_info)
 
     return places
+
+
 
