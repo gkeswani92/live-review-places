@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from logic.nearby import meters_to_walking_time
+from logic.nearby_util import meters_to_walking_time
 
 
 class Nearby(TestCase):
