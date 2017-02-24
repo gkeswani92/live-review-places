@@ -5,7 +5,7 @@ from forms.login import LoginForm
 from forms.address import AddressForm
 from logic.sign_up import register_user
 from logic.sign_in import is_valid_user
-from logic.nearby import find_nearby_places, address_to_latlng
+from logic.nearby import NearbyWikipedia, address_to_latlng
 
 
 index_page = Blueprint('index', __name__, template_folder='templates')
@@ -69,7 +69,7 @@ def home():
         else:
             address = form.address.data
             my_coordinates = address_to_latlng(address)
-            nearby_places = find_nearby_places(address)
+            nearby_places = NearbyWikipedia.find_nearby_places(address)
             return render_template('home.html', form=form, places=nearby_places, my_coordinates=my_coordinates)
 
     else:
