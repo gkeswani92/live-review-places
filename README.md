@@ -1,6 +1,6 @@
 ##Map_Nearby_Places
 
-Map Nearby Places is RESTful service written in Python/Flask to help you find and rate interesting places near you.
+Map Nearby Places is RESTful service written in Python/Flask to help you find and rate interesting places near you using the Google Places API and the Yelp Fusion API.
 
 [![Build Status](https://travis-ci.org/gkeswani92/Map_Nearby_Places.svg?branch=master)](https://travis-ci.org/gkeswani92/Map_Nearby_Places) [![Coverage Status](https://coveralls.io/repos/github/gkeswani92/Map_Nearby_Places/badge.svg)](https://coveralls.io/github/gkeswani92/Map_Nearby_Places)
 
