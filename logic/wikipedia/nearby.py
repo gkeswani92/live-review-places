@@ -1,33 +1,11 @@
 import json
-from unittest import TestCase
-
-import geocoder
 import urllib2
 
-from models.database_setup import SQLAlchemyService
-
-db = SQLAlchemyService().get_instance()
-
-
-def meters_to_walking_time(meters):
-    """
-    Finds the walking time for the given distance
-    """
-    # 80 meters is one minute walking time
-    if meters:
-        return int(meters / 80)
-    return -1
+from logic.nearby_util import address_to_latlng
+from logic.nearby_util import meters_to_walking_time
 
 
-def address_to_latlng(address):
-    """
-    Finds the latitude and longitude of the address
-    """
-    g = geocoder.google(address)
-    return g.lat, g.lng
-
-
-class NearbyWikipedia(object):
+class NearbySearchWikipedia(object):
 
     @staticmethod
     def wiki_path(place):
@@ -61,7 +39,7 @@ class NearbyWikipedia(object):
             latitude = place['lat']
             longitude = place['lon']
 
-            wiki_url = NearbyWikipedia.wiki_path(name)
+            wiki_url = NearbySearchWikipedia.wiki_path(name)
             walking_time = meters_to_walking_time(meters)
 
             place_info = {
@@ -75,6 +53,3 @@ class NearbyWikipedia(object):
             places.append(place_info)
 
         return places
-
-
-

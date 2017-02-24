@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from logic.nearby import meters_to_walking_time
+from logic.nearby_util import meters_to_walking_time
 
 import unittest
 

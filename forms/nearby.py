@@ -4,6 +4,7 @@ from wtforms import SubmitField
 from wtforms.validators import DataRequired
 
 
-class AddressForm(FlaskForm):
+class NearbySearchForm(FlaskForm):
+    keyword_search = StringField('Keyword')
     address = StringField('Address', validators=[DataRequired("Please enter an address")])
     submit = SubmitField("Search")

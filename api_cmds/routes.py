@@ -1,11 +1,14 @@
 from flask import render_template, Blueprint, request, session, redirect, url_for
 
+from config import GOOGLE_NEARBY
 from forms.sign_up import SignUpForm
 from forms.login import LoginForm
-from forms.address import AddressForm
+from forms.nearby import NearbySearchForm
 from logic.sign_up import register_user
 from logic.sign_in import is_valid_user
-from logic.nearby import NearbyWikipedia, address_to_latlng
+from logic.nearby_util import address_to_latlng
+from logic.wikipedia.nearby import NearbySearchWikipedia
+from logic.google_places.nearby import NearbySearchGoogle
 
 
 index_page = Blueprint('index', __name__, template_folder='templates')
@@ -61,21 +64,30 @@ def home():
     if 'email' not in session:
         return redirect(url_for('login.login'))
 
-    form = AddressForm()
+    form = NearbySearchForm()
 
     if request.method == 'POST':
         if form.validate() is False:
             return render_template('home.html', form=form)
         else:
             address = form.address.data
-            my_coordinates = address_to_latlng(address)
-            nearby_places = NearbyWikipedia.find_nearby_places(address)
-            return render_template('home.html', form=form, places=nearby_places, my_coordinates=my_coordinates)
+            keyword_search = form.keyword_search.data
+
+            # Use google nearby search if it is set to True in the config
+            if GOOGLE_NEARBY:
+                google_search = NearbySearchGoogle()
+                nearby_places = google_search.find_nearby_places(keyword_search, address)
+
+            # Else, fall back on wikipedia search
+            else:
+                my_coordinates = address_to_latlng(address)
+                nearby_places = NearbySearchWikipedia.find_nearby_places(address, my_coordinates)
+
+            return render_template('home.html', form=form, places=nearby_places)
 
     else:
         nearby_places = []
-        my_coordinates = (37.4221, -122.0844)
-        return render_template('home.html', form=form, places=nearby_places, my_coordinates=my_coordinates)
+        return render_template('home.html', form=form, places=nearby_places)
 
 
 @sign_out_page.route('/sign_out')
