@@ -40,6 +40,9 @@
           {% for place in places %}
             <article>
               <a class="name" href="{{ place['url'] }}" target="_blank">{{ place['name'] }}</a>
+              <p> Rating: {{ place['rating'] }} </p>
+                <p> Price Level: {{ place['price_level'] }} </p>
+                <p> Phone: {{ place['phone'] }} </p>
             </article>
           {% endfor %}
         </div>

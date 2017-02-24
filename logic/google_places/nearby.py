@@ -26,7 +26,7 @@ class NearbySearchGoogle(object):
                 'name': place.name,
                 'id': place.place_id,
                 'phone': place.local_phone_number,
-                'website': place.website,
+                'url': place.website,
                 'rating': place.details.get('rating', None),
                 'price_level': place.details.get('price_level', None),
             }
