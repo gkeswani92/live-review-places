@@ -21,8 +21,8 @@ def run_test_suite(test_path):
 if __name__ == '__main__':
     parser = optparse.OptionParser(USAGE)
     options, args = parser.parse_args()
-    if len(args) != 2:
-        print 'Error: Exactly 2 arguments required.'
+    if len(args) != 1:
+        print 'Error: Exactly 1 arguments required.'
         parser.print_help()
         sys.exit(1)
     TEST_PATH = args[0]
