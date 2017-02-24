@@ -10,7 +10,7 @@ TEST_PATH   Path to package containing test modules"""
 
 def run_test_suite(test_path):
     # Discover and run tests.
-    suite = unittest.loader.TestLoader().discover(test_path)
+    suite = unittest.loader.TestLoader().discover(test_path, pattern="*test.py")
     result = unittest.TextTestRunner(verbosity=2).run(suite)
 
     # Fail the build if the suite was not successful!
