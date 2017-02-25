@@ -18,7 +18,7 @@ install:
 
 # command to run tests
 script:
-  - docker ps | grep -q map_nearby_places
+  - docker ps | grep map_nearby_places
   - coverage run --source . testrunner.py ./tests
 
 after_success:
