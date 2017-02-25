@@ -9,7 +9,7 @@ services:
 
 before_install:
   - docker build -t map_nearby_places .
-  - docker run -p 8000:8000 -d --name map_nearby_places map_nearby_places
+  - docker run -ti -p 8000:8000 -d --name map_nearby_places map_nearby_places
 
 # command to install dependencies
 install:
