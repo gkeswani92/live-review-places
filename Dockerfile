@@ -17,6 +17,3 @@ RUN cd /code
 
 RUN git clone https://github.com/gkeswani92/Map_Nearby_Places.git
 WORKDIR Map_Nearby_Places
-
-CMD ["python", "setup.py"]
-

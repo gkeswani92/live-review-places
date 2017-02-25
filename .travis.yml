@@ -1,6 +1,16 @@
+sudo: required
+
 language: python
 python:
   - "2.7"
+
+services:
+  - docker
+
+before_install:
+  - docker build -t map_nearby_places .
+  - docker run -p 8000:8000 --name map_nearby_places map_nearby_places python setup.py
+  - docker ps -a
 
 # command to install dependencies
 install:
@@ -9,6 +19,7 @@ install:
 
 # command to run tests
 script:
+  - docker ps | grep -q map_nearby_places
   - coverage run --source . testrunner.py ./tests
 
 after_success:
