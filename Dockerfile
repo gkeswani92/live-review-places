@@ -14,6 +14,5 @@ RUN pip install -r /config/requirements.txt
 
 RUN mkdir /code;
 RUN cd /code
-
-RUN git clone https://github.com/gkeswani92/Map_Nearby_Places.git
-WORKDIR Map_Nearby_Places
+VOLUME /code
+WORKDIR /code
