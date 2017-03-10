@@ -10,6 +10,7 @@ services:
 # command to install dependencies
 before_install:
   - docker-compose build
+  - pip install -r requirements.txt
   - pip install coveralls
 
 install:
