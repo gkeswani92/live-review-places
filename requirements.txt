@@ -1,4 +1,4 @@
-appdirs==1.4.0
+appdirs
 click==6.6
 decorator==4.0.10
 Flask==0.11.1

@@ -19,7 +19,7 @@ pip install requirements.txt
 
 ###Run the server: 
 ```
-python setup.py 
+python run.py
 ```
 
 ## Docker
@@ -27,7 +27,7 @@ python setup.py
 docker build -t map_nearby_places .
 
 #Deprecated after switching to VOLUME from ADD: 
-docker run -ti -p 8000:8000 map_nearby_places python setup.py
+docker run -ti -p 8000:8000 map_nearby_places python run.py
 
-docker run -ti -p 8000:8000 -v `pwd`:/code map_nearby_places python setup.py
+docker run -ti -p 8000:8000 -v `pwd`:/code map_nearby_places python run.py
 ```
