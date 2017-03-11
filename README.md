@@ -24,10 +24,15 @@ python run.py
 
 ## Docker
 ```
+# Deprecated after switching to docker-compose:
 docker build -t map_nearby_places .
 
-#Deprecated after switching to VOLUME from ADD: 
+# Deprecated after switching to VOLUME from ADD: 
 docker run -ti -p 8000:8000 map_nearby_places python run.py
 
+# Deprecated after switching to docker-compose:
 docker run -ti -p 8000:8000 -v `pwd`:/code map_nearby_places python run.py
+
+docker-compose build
+docker-compose up
 ```
