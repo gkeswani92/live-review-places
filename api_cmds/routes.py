@@ -18,6 +18,9 @@ home_page = Blueprint('home', __name__, template_folder='templates')
 login_page = Blueprint('login', __name__, template_folder='templates')
 sign_out_page = Blueprint('sign_out', __name__, template_folder='templates')
 
+# All routes must be added here to be available in the application
+routes = [index_page, about_page, sign_up_page, home_page, login_page, sign_out_page]
+
 
 @index_page.route('/')
 def index():
