@@ -1,5 +1,5 @@
 import json
-import urllib2
+import urllib3
 
 from logic.nearby_util import address_to_latlng
 from logic.nearby_util import meters_to_walking_time
@@ -12,7 +12,7 @@ class NearbySearchWikipedia(object):
         """
         Creates the wikipedia link for the place
         """
-        return urllib2.urlparse.urljoin("http://en.wikipedia.org/wiki/", place.replace(' ', '_'))
+        return urllib3.urlparse.urljoin("http://en.wikipedia.org/wiki/", place.replace(' ', '_'))
 
     @staticmethod
     def find_nearby_places(address):
@@ -26,7 +26,7 @@ class NearbySearchWikipedia(object):
         api_url = 'https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gsradius=5000&gscoord={0}%7C{1}&gslimit=20&format=json'
         query_url = api_url.format(latitude, longitude)
 
-        query = urllib2.urlopen(query_url)
+        query = urllib3.urlopen(query_url)
         results = query.read()
         query.close()
 
