@@ -1,4 +1,4 @@
-##Live Review Places
+###Live Review Places
 
 Live Review Places is RESTful service written in Python/Flask to help you find and rate interesting places near you using the Google Places API and the Yelp Fusion API.
 
