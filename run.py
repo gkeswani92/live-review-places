@@ -1,11 +1,13 @@
-from models.database_setup import SQLAlchemyService
 from flask import Flask
+from models.database_setup import SQLAlchemyService
+
 from api_cmds.routes import about_page
-from api_cmds.routes import index_page
-from api_cmds.routes import sign_up_page
-from api_cmds.routes import sign_out_page
 from api_cmds.routes import home_page
-from api_cmds.routes import login_page
+from api_cmds.routes import index_page
+from api_cmds.registration import login_page
+from api_cmds.registration import sign_out_page
+from api_cmds.registration import sign_up_page
+
 
 app = Flask(__name__)
 
