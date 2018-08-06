@@ -2,24 +2,19 @@ version: '2'
 services:
   postgres:
     image: postgres:latest
-    container_name: postgres_livereviews
-
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb_livereviews
+    container_name: postgres
 
   flask:
     restart: always
     build: .
-    container_name: flask_livereviews
+    container_name: flask
     ports:
       - 8000:8000
     command: bash -c "sleep 2; python run.py"
     volumes:
       - .:/code
     links:
-      - postgres:postgres_livereviews
-      - mongodb:mongodb_livereviews
+      - postgres:postgres
 
 networks:
  esnet:
